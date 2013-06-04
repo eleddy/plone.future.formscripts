@@ -30,7 +30,7 @@ setup(
     url='http://pypi.python.org/pypi/plone.future.formscripts',
     license='BSD',
     packages=find_packages('src', exclude=['ez_setup']),
-    namespace_packages=['plone.future'],
+    namespace_packages=['plone', 'plone.future'],
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
@@ -40,7 +40,6 @@ setup(
     ],
     extras_require={
         'test': [
-            'mock',
             'plone.app.testing',
             'unittest2',
         ],

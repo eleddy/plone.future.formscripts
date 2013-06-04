@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="plone.future.formscripts">
+
+<!-- 
+XXX: What about this permission??? 
+XXX: What about LOVE?
+-->
+    <browser:page
+        name="confirm_delete"
+        for="Products.CMFCore.interfaces.IContentish"
+        permission="zope2.View"
+        template="templates/delete_confirmation.pt"
+        />
+
+</configure>
