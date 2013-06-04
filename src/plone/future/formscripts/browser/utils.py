@@ -9,6 +9,7 @@ from Products.CMFPlone import utils
 from Products.CMFPlone import PloneMessageFactory as _
 from plone.protect.postonly import check as checkpost
 from ZODB.POSException import ConflictError
+from zope.container.interfaces import INameChooser
 
 
 class ContentUtilViews(BrowserView):
@@ -127,3 +128,33 @@ class ContentUtilViews(BrowserView):
             utils.transaction_note('Deleted %s' % context.absolute_url())
             plone_utils.addPortalMessage(message)
             return request.response.redirect(parent.absolute_url())
+
+    def object_rename(self):
+        self.protect()
+        context = aq_inner(self.context)
+        plone_utils = getToolByName(context, 'plone_utils')
+        title = self.objectTitle()
+        referer = self.request.get('HTTP_REFERER')
+        new_ids = self.request.get('new_ids')
+        new_titles = self.request.get('new_titles')
+        paths = self.request.get('paths')
+        message = _(u'"${title}" could not be renamed: Unknown Error.',
+                mapping={u'title': title})
+        old_id = context.id
+        
+        success, failure = putils.renameObjectsByPaths(paths, new_ids, new_titles,
+                                               REQUEST=request)
+
+        if failure:
+            message = _(u'The item could not be renamed: ${items}.',
+                mapping={u'items': ', '.join(failure.keys())})
+            plone_utils.addPortalMessage(message)
+        elif len(success):
+            message = _(u"Renamed '${oldid}' to '${newid}'.",
+                mapping={u'oldid': old_id, u'newid': new_ids[0]})
+            redirect_url =
+            plone_utils.addPortalMessage(message)
+            redirect_url = "/".join(self.context.getPhysicalPath()[1:-1] + [new_id])
+            return request.response.redirect(redirect_url)
+        
+        return self.redirectReferer()

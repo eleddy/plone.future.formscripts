@@ -15,4 +15,52 @@ XXX: What about LOVE?
         template="templates/delete_confirmation.pt"
         />
 
+    <browser:page
+        name="confirm_rename"
+        for="Products.CMFCore.interfaces.IContentish"
+        permission="zope2.View"
+        template="templates/rename.pt"
+        />
+
+    <browser:page
+        for="Products.CMFCore.interfaces.IContentish"
+        name="object_copy"
+        class=".utils.ContentUtilViews"
+        attribute="object_copy"
+        permission="zope2.CopyOrMove"
+        />
+
+    <browser:page
+        for="Products.CMFCore.interfaces.IContentish"
+        name="object_cut"
+        class=".utils.ContentUtilViews"
+        attribute="object_cut"
+        permission="zope2.CopyOrMove"
+        />
+
+    <browser:page
+        for="Products.CMFCore.interfaces.IContentish"
+        name="object_paste"
+        class=".utils.ContentUtilViews"
+        attribute="object_paste"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="Products.CMFCore.interfaces.IContentish"
+        name="object_delete"
+        class=".utils.ContentUtilViews"
+        attribute="object_delete"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="Products.CMFCore.interfaces.IContentish"
+        name="object_rename"
+        class=".utils.ContentUtilViews"
+        attribute="object_rename"
+        permission="permission="zope2.CopyOrMove""
+        />
+
+
 </configure>

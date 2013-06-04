@@ -14,5 +14,18 @@
    </property>
    <property name="visible">True</property>
   </object>
+  <object name="rename" meta_type="CMF Action" i18n:domain="plone">
+   <property name="title" i18n:translate="">Rename</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/confirm_rename</property>
+   <property name="link_target"></property>
+   <property name="icon_expr"></property>
+   <property name="available_expr">python:checkPermission("Delete objects", globals_view.getParentObject()) and checkPermission("Copy or Move", object) and checkPermission("Add portal content", object) and not globals_view.isPortalOrPortalDefaultPage()</property>
+   <property name="permissions">
+    <element value="Delete objects"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+
  </object>
 </object>
